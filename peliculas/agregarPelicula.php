@@ -16,7 +16,7 @@
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark d-flex">
         <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="index.html">PELISFLIX</a>
+        <a class="navbar-brand ps-3" href="index.php">PELISFLIX</a>
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
 
@@ -96,7 +96,28 @@
                                 </a>
                             </nav>
                         </div>
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseIdiomas" aria-expanded="false" aria-controls="collapseIdiomas">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-globe"></i></div>
+                            Idiomas
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseIdiomas" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionIdiomas">
+                                <a class="nav-link" href="index.html">
+                                    <div class="sb-nav-link-icon"><i class="fa-solid fa-eye"></i></div>
+                                    Ver Idiomas
+                                </a>
+                                <a class="nav-link" href="agregarIdioma.php">
+                                    <div class="sb-nav-link-icon"><i class="fa-solid fa-plus"></i></div>
+                                    Agregar Idioma
+                                </a>
+                            </nav>
+                        </div>
 
+                        <a class="nav-link" href="index.html">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-file-contract"></i></div>
+                            Ver Repostes
+                        </a>
                     </div>
                 </div>
             </nav>

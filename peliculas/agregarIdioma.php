@@ -1,20 +1,3 @@
-<?php
-require_once 'model/MySQL.php';
-require_once 'model/mycript.php';
-
-$mysql = new MySQL;
-$mysql->conectarBD();
-$consulta = $mysql->efectuarConsulta("SELECT
-peliculas.peliculas.id_Pelicula,
-peliculas.peliculas.nom_Pelicula,
-peliculas.peliculas.descripcion,
-peliculas.peliculas.Usuarios_id_Usuario
-FROM
-peliculas.peliculas WHERE peliculas.peliculas.estado ='1'");
-$mysql->desconectar();
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,20 +14,14 @@ $mysql->desconectar();
 </head>
 
 <body class="sb-nav-fixed">
-    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark d-flex">
         <!-- Navbar Brand-->
         <a class="navbar-brand ps-3" href="index.php">PELISFLIX</a>
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
-        <!-- Navbar Search-->
-        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-            <div class="input-group">
-                <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-            </div>
-        </form>
+
         <!-- Navbar-->
-        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4 ">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -75,7 +52,7 @@ $mysql->desconectar();
                                     <div class="sb-nav-link-icon"><i class="fa-solid fa-eye"></i></div>
                                     Ver Peliculas
                                 </a>
-                                <a class="nav-link" href="./agregarPelicula.php">
+                                <a class="nav-link" href="agregarPelicula.php">
                                     <div class="sb-nav-link-icon"><i class="fa-solid fa-plus"></i></div>
                                     Agregar Pelicula
                                 </a>
@@ -119,7 +96,6 @@ $mysql->desconectar();
                                 </a>
                             </nav>
                         </div>
-
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseIdiomas" aria-expanded="false" aria-controls="collapseIdiomas">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-globe"></i></div>
                             Idiomas
@@ -131,8 +107,8 @@ $mysql->desconectar();
                                     <div class="sb-nav-link-icon"><i class="fa-solid fa-eye"></i></div>
                                     Ver Idiomas
                                 </a>
-                                <a class="nav-link" href="agregarIdioma.php">
-                                    <div class="sb-nav-link-icon"><i class="fa-solid fa-plus"></i></div>
+                                <a class="nav-link" href="index.html">
+                                    <div class="sb-nav-link-icon"><i class="agregarIdioma.php"></i></div>
                                     Agregar Idioma
                                 </a>
                             </nav>
@@ -149,30 +125,19 @@ $mysql->desconectar();
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <table class="table table-striped border mt-4">
-                        <thead>
-                            <tr>
-                                <th>ID_Pelicula</th>
-                                <th>nom_Pelicula</th>
-                                <th>descripcion</th>
-                                <th>descripcion</th>
-                                <th>Editar</th>
-                                <th>Eliminar</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php while ($row = mysqli_fetch_array($consulta)) { ?>
-                                <tr>
-                                    <td><?php echo $row['id_Pelicula'] ?></td>
-                                    <td><?php echo $row['nom_Pelicula'] ?></td>
-                                    <td><?php echo $row['descripcion'] ?></td>
-                                    <td><?php echo $row['Usuarios_id_Usuario'] ?></td>
-                                    <td><a class="btn btn-success bi bi-pencil" href="./editar.php?id=<?php echo $row['id_Usuario'] ?>"></a></td>
-                                    <td><a class="btn btn-danger bi bi-trash" href="./controlador/eliminar.php?id_Usuario=<?php echo $row['id_Usuario'] ?>"></a></td>
-                                </tr>
-                            <?php } ?>
-                        </tbody>
-                    </table>
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <h1 class="text-center">
+                                Agregar Idioma
+                            </h1>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 d-flex justify-content-center mt-2 ">
+                            <h6>Nombre del idioma</h6>
+                            <input type="text" class="form-control w-50 ">
+                        </div>
+                    </div>
 
                 </div>
             </main>
@@ -193,7 +158,7 @@ $mysql->desconectar();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="./assets/js2/scripts.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-    <script src="./assets/assets/demo/chart-area-demo.js"></script>
+     <script src="./assets/assets/demo/chart-area-demo.js"></script>
     <script src="./assets/assets/demo/chart-bar-demo.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
     <script src="./assets/js2/datatables-simple-demo.js"></script>
