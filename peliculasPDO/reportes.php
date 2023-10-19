@@ -62,59 +62,12 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <div class="row mt-2">
-                            <div class="col-1"><a href="./agregarPelicula.php" class="bi bi-plus-lg btn btn-success "></a></div>
+                        <div class="row">
+                            <div class="col-12 mt-2">
+                                <a class="btn btn-success" href="./controller/generarExcel.php"><i class="fa-solid fa-file-excel"></i> Generar Excel</a>
+                                <a class="btn btn-danger " href="./controller/generarPDF.php"><i class="fa-solid fa-file-pdf"></i> Generar PDF</a>
+                            </div>
                         </div>
-                        <div class="row mt-2">
-                            <?php
-                            try {
-                                // Paso 1: Crear una instancia de la clase PDO y establecer una conexión a la base de datos.
-                                $pdo = new PDO("mysql:host=localhost;dbname=peliculaspdo", "root", "");
-
-                                // Configurar el manejo de errores y excepciones.
-                                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-                                // Paso 2: Preparar una consulta SQL usando consultas preparadas.
-                                $stmt = $pdo->prepare("SELECT * FROM pelicula WHERE estado = 1");
-
-                                // Paso 4: Ejecutar la consulta preparada.
-                                $stmt->execute();
-
-                                // Paso 5: Recuperar resultados.
-                                while ($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                            ?> <div class="col-2 m-4">
-                                        <div class="card" style="width: 18rem;">
-                                            <div class="card-header">
-                                                <h4 class="card-title"><?php echo $fila['nombrePelicula'] ?></h4>
-                                            </div>
-                                            <div class="card-body">
-
-                                                <h6 class="card-subtitle mb-2 text-body-secondary mt-3">Descripcion</h6>
-                                                <p class="card-text"> <?php echo $fila['descripcionPelicula'] ?> </p>
-                                                <div class="row d-flex">
-                                                    <div class="col-6">
-                                                        <a href="./controller/eliminarPelicula.php?id=<?php echo $fila['idPelicula'] ?>" class="btn btn-danger">Eliminar</a>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <a href="./editarPelicula.php?id=<?php echo $fila['idPelicula'] ?>" class="btn btn-success">Editar</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                            <?php
-                                    /* echo "idPelicula: " . $fila['idPelicula'] . ", nombrePelicula: " . $fila['nombrePelicula'] . ", fecha: " . $fila['fecha'] . "<br>"; */
-                                }
-
-                                // Paso 6: Cerrar la conexión a la base de datos.
-                                $pdo = null;
-                            } catch (PDOException $e) {
-                                // Manejo de errores en caso de que ocurra una excepción.
-                                echo "Error: " . $e->getMessage();
-                            }
-                            ?>
-                        </div>
-
                     </div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">

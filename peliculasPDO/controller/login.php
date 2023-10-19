@@ -6,7 +6,7 @@ if (
     isset($_POST['user']) && !empty($_POST['user']) &&
     isset($_POST['pass']) && !empty($_POST['pass'])
 ) {
-
+    session_start();
     require_once '../model/mycript.php';
     try {
         // Paso 1: Crear una instancia de la clase PDO y establecer una conexión a la base de datos.
@@ -16,14 +16,7 @@ if (
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         // Paso 2: Preparar una consulta SQL usando consultas preparadas.
-        $stmt = $pdo->prepare("SELECT
-        id,
-        user,
-        pass
-        FROM
-        peliculas.usuarios
-        WHERE user = :user' && 
-        pass =  :pass");
+        $stmt = $pdo->prepare("SELECT id, user, pass FROM usuario WHERE user = :user && pass =  :pass");
 
         // Paso 3: Vincular parámetros a la consulta preparada.
         $user = $_POST['user'];
@@ -33,7 +26,10 @@ if (
 
         // Paso 4: Ejecutar la consulta preparada.
         $stmt->execute();
-
+        while ($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $_SESSION["login"] = 1;
+            $_SESSION["nomUser"] = $fila['user'];
+        }
         header("Location: ../index.php");
 
         // Paso 6: Cerrar la conexión a la base de datos.

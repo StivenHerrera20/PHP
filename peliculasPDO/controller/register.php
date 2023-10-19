@@ -16,8 +16,7 @@ if (
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         // Paso 2: Preparar una consulta SQL usando consultas preparadas.
-        $stmt = $pdo->prepare("INSERT INTO 
-        usuario (user, pass) VALUES (':user' , ':pass')");
+        $stmt = $pdo->prepare("INSERT INTO usuario (user, pass) VALUES (:user , :pass)");
 
         // Paso 3: Vincular parámetros a la consulta preparada.
         $user = $_POST['user'];
@@ -28,7 +27,7 @@ if (
         // Paso 4: Ejecutar la consulta preparada.
         $stmt->execute();
 
-        header("Location: ../index.php");
+        header("Location: ../login.php");
 
         // Paso 6: Cerrar la conexión a la base de datos.
         $pdo = null;

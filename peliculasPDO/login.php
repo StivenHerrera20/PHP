@@ -53,7 +53,7 @@
 					</div>
 					<div class="row">
 						<div class="col-12 d-flex justify-content-center">
-							<a href="./register.html" class="m-t-22 ">No tienes cuentas?</a>
+							<a href="./register.php" class="m-t-22 ">No tienes cuentas?</a>
 						</div>
 					</div>
 
