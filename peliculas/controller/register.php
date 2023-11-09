@@ -6,26 +6,40 @@ if (
     isset($_POST['user']) && !empty($_POST['user']) &&
     isset($_POST['pass']) && !empty($_POST['pass'])
 ) {
-    //Se hace el llamado del modelo de conexión y consultas
-    require_once '../model/MySQL.php';
-    require_once '../model/mycript.php';
-
-    //Se capturan las variables que vienen desde el formulario
     $user = $_POST['user'];
-    $pass = encrypt($_POST['pass']);
+    $pass = $_POST['pass'];
 
-    //Se instancia la clase, es decir, se llama para poder usar metodos
-    $mysql = new MySQL();
+    require_once '../model/mycript.php';
+    require_once '../model/MySQl.php';
 
-    //se hace uso del metodo para conectarse a la base de datos
-    $mysql->conectarBD();
+    try {
+        $mysql = new MySql();
+        //Se instancia la clase
+        $mysql->conectar();
+        $consulta2 = $mysql->efectuarConsulta("SELECT * FROM peliculas.usuario WHERE peliculas.usuario.user ='" . $user . "'");
+        $mysql->desconectar();
 
-    //se guarda en una variable la consulta utilizando el motodo para dicho proceso
-    $usuarios = $mysql->efectuarConsulta("INSERT INTO 
-    peliculas.usuarios (user, pass) VALUES ('" . $user . "' , '" . $pass . "')");
+        if (mysqli_num_rows($consulta2) > 0) {
+            header("Location: ../resgitro.php");
+            session_start();
+            $_SESSION['mensajeErr'] = "El usuario ya existe en la Base de Datos";
+            $_SESSION['mensaje2Err'] = "Fallo al insertar";
+        } else {
+            $mysql->conectar();
+            //Se guarda la respuesta de la consulta en la variable 
+            $consulta = $mysql->efectuarConsulta("INSERT INTO peliculas.usuario (user,pass) VALUES ('" . $user . "','" . encrypt($pass) . "')");
+            //Se desconect de la base de datos
+            $mysql->desconectar();
 
-    //se desconecta de la base de datos para liberar memoria
-    $mysql->desconectar();
-    //de lo contrario avanza del login
-    header("location: ../login.html");
+            header("Location: ../index.php");
+        }
+
+
+
+        // Paso 6: Cerrar la conexión a la base de datos.
+        $pdo = null;
+    } catch (PDOException $e) {
+        // Manejo de errores en caso de que ocurra una excepción.
+        echo "Error: " . $e->getMessage();
+    }
 }

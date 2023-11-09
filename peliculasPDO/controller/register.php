@@ -10,7 +10,7 @@ if (
     require_once '../model/mycript.php';
     try {
         // Paso 1: Crear una instancia de la clase PDO y establecer una conexión a la base de datos.
-        $pdo = new PDO("mysql:host=localhost;dbname=peliculaspdo", "root", "");
+        $pdo = new PDO("mysql:host=localhost;dbname=id21435907_peliculaspdo", "id21435907_s1hg6", "Stiven20.");
 
         // Configurar el manejo de errores y excepciones.
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -27,7 +27,7 @@ if (
         // Paso 4: Ejecutar la consulta preparada.
         $stmt->execute();
 
-        header("Location: ../login.php");
+        header("Location: ../index.php");
 
         // Paso 6: Cerrar la conexión a la base de datos.
         $pdo = null;

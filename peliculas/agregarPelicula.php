@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,27 +14,30 @@
     <title>Dashboard - SB Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <link href="./assets/css2/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 </head>
 
 <body class="sb-nav-fixed">
-    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark d-flex">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="index.php">PELISFLIX</a>
+        <a class="navbar-brand ps-3" href="inicio.php">PELISFLIX</a>
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
-
+        <!-- Navbar Search-->
+        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+            <div class="input-group">
+                <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+                <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+            </div>
+        </form>
         <!-- Navbar-->
-        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4 ">
+        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i>
+                    <?php echo $_SESSION["nomUser"] ?> </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#!">Settings</a></li>
-                    <li><a class="dropdown-item" href="#!">Activity Log</a></li>
-                    <li>
-                        <hr class="dropdown-divider" />
-                    </li>
-                    <li><a class="dropdown-item" href="#!">Logout</a></li>
+                    <li><a class="dropdown-item" href="./controller/cerrarSesion.php">Cerrar Sesión </a></li>
                 </ul>
             </li>
         </ul>
@@ -41,82 +48,10 @@
                 <div class="sb-sidenav-menu">
                     <div class="nav">
 
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePeliculas" aria-expanded="false" aria-controls="collapsePeliculas">
+
+                        <a class="nav-link" href="inicio.php">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-video"></i></div>
                             Peliculas
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapsePeliculas" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPeliculas">
-                                <a class="nav-link" href="index.php">
-                                    <div class="sb-nav-link-icon"><i class="fa-solid fa-eye"></i></div>
-                                    Ver Peliculas
-                                </a>
-                                <a class="nav-link" href="agregarPelicula.php">
-                                    <div class="sb-nav-link-icon"><i class="fa-solid fa-plus"></i></div>
-                                    Agregar Pelicula
-                                </a>
-                            </nav>
-                        </div>
-
-
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseGeneros" aria-expanded="false" aria-controls="collapseGeneros">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-masks-theater"></i></div>
-                            Generos
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapseGeneros" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionGeneros">
-                                <a class="nav-link" href="index.html">
-                                    <div class="sb-nav-link-icon"><i class="fa-solid fa-eye"></i></div>
-                                    Ver Generos
-                                </a>
-                                <a class="nav-link" href="index.html">
-                                    <div class="sb-nav-link-icon"><i class="fa-solid fa-plus"></i></div>
-                                    Agregar Genero
-                                </a>
-                            </nav>
-                        </div>
-
-
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseUsuarios" aria-expanded="false" aria-controls="collapseUsuarios">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-user-group"></i></div>
-                            Usuarios
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapseUsuarios" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionUsuarios">
-                                <a class="nav-link" href="index.html">
-                                    <div class="sb-nav-link-icon"><i class="fa-solid fa-eye"></i></div>
-                                    Ver Usuarios
-                                </a>
-                                <a class="nav-link" href="index.html">
-                                    <div class="sb-nav-link-icon"><i class="fa-solid fa-plus"></i></div>
-                                    Agregar Usuario
-                                </a>
-                            </nav>
-                        </div>
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseIdiomas" aria-expanded="false" aria-controls="collapseIdiomas">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-globe"></i></div>
-                            Idiomas
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapseIdiomas" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionIdiomas">
-                                <a class="nav-link" href="index.html">
-                                    <div class="sb-nav-link-icon"><i class="fa-solid fa-eye"></i></div>
-                                    Ver Idiomas
-                                </a>
-                                <a class="nav-link" href="agregarIdioma.php">
-                                    <div class="sb-nav-link-icon"><i class="fa-solid fa-plus"></i></div>
-                                    Agregar Idioma
-                                </a>
-                            </nav>
-                        </div>
-
-                        <a class="nav-link" href="index.html">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-file-contract"></i></div>
-                            Ver Repostes
                         </a>
                     </div>
                 </div>
@@ -125,7 +60,48 @@
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
+                    <div class="row mt-2">
+                        <h1 class="text-center">Agregar Pelicula</h1>
+                        <form action="./controller/agregarPelicula.php" method="post">
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Nombre Pelicula</label>
+                                <input type="text" class="form-control" id="nombrePelicula" name="nombrePelicula">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Descripcion Pelicula</label>
+                                <input type="text" class="form-control" id="descripcionPelicula" name="descripcionPelicula">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Edad</label>
+                                <input type="number" class="form-control" id="edad" name="edad">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Estado de la pelicula</label>
+                                <select class="form-select" id="estadoPelicula" name="estadoPelicula">
+                                    <option value="1">Activado</option>
+                                    <option value="0">Desactivado</option>
+                                </select>
+                            </div>
 
+                            <button type="submit" class="btn btn-success">Enviar</button>
+                        </form>
+
+                    </div>
+                    <div class="row mt-2">
+                        <?php
+                        if (isset($_SESSION['error'])) {
+                        ?>
+                            <div class="col d-flex justify-content-center">
+                                <div class="alert alert-danger w-50 text-center" role="alert">
+                                    <h2><?php echo $_SESSION['error'] ?></h2>
+                                    <h4><?php echo $_SESSION['errorTitu'] ?></h4>
+                                </div>
+                            </div>
+                        <?php
+                            unset($_SESSION['error']);
+                        }
+                        ?>
+                    </div>
 
                 </div>
             </main>

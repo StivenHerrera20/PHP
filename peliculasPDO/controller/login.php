@@ -30,7 +30,7 @@ if (
             $_SESSION["login"] = 1;
             $_SESSION["nomUser"] = $fila['user'];
         }
-        header("Location: ../index.php");
+        header("Location: ../inicio.php");
 
         // Paso 6: Cerrar la conexión a la base de datos.
         $pdo = null;

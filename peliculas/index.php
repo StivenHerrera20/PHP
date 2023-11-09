@@ -1,202 +1,87 @@
-<?php
-require_once 'model/MySQL.php';
-require_once 'model/mycript.php';
-
-$mysql = new MySQL;
-$mysql->conectarBD();
-$consulta = $mysql->efectuarConsulta("SELECT
-peliculas.peliculas.id_Pelicula,
-peliculas.peliculas.nom_Pelicula,
-peliculas.peliculas.descripcion,
-peliculas.peliculas.Usuarios_id_Usuario
-FROM
-peliculas.peliculas WHERE peliculas.peliculas.estado ='1'");
-$mysql->desconectar();
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>Dashboard - SB Admin</title>
-    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
-    <link href="./assets/css2/styles.css" rel="stylesheet" />
-    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+	<title>Login</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="./assets/images/icons/favicon.ico" />
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="./assets/vendor/bootstrap/css/bootstrap.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="./assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="./assets/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="./assets/vendor/animate/animate.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="./assets/vendor/css-hamburgers/hamburgers.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="./assets/vendor/animsition/css/animsition.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="./assets/vendor/select2/select2.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="./assets/vendor/daterangepicker/daterangepicker.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="./assets/css/util.css">
+	<link rel="stylesheet" type="text/css" href="./assets/css/main.css">
+	<!--===============================================================================================-->
 </head>
 
-<body class="sb-nav-fixed">
-    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-        <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="index.php">PELISFLIX</a>
-        <!-- Sidebar Toggle-->
-        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
-        <!-- Navbar Search-->
-        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-            <div class="input-group">
-                <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-            </div>
-        </form>
-        <!-- Navbar-->
-        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#!">Settings</a></li>
-                    <li><a class="dropdown-item" href="#!">Activity Log</a></li>
-                    <li>
-                        <hr class="dropdown-divider" />
-                    </li>
-                    <li><a class="dropdown-item" href="#!">Logout</a></li>
-                </ul>
-            </li>
-        </ul>
-    </nav>
-    <div id="layoutSidenav">
-        <div id="layoutSidenav_nav">
-            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-                <div class="sb-sidenav-menu">
-                    <div class="nav">
+<body>
 
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePeliculas" aria-expanded="false" aria-controls="collapsePeliculas">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-video"></i></div>
-                            Peliculas
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapsePeliculas" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPeliculas">
-                                <a class="nav-link" href="index.php">
-                                    <div class="sb-nav-link-icon"><i class="fa-solid fa-eye"></i></div>
-                                    Ver Peliculas
-                                </a>
-                                <a class="nav-link" href="./agregarPelicula.php">
-                                    <div class="sb-nav-link-icon"><i class="fa-solid fa-plus"></i></div>
-                                    Agregar Pelicula
-                                </a>
-                            </nav>
-                        </div>
+	<div class="limiter">
+		<div class="container-login100" style="background-image: url('./assets/images/bg-01.jpg');">
+			<div class="wrap-login100 p-t-30 p-b-50">
+				<form action="./controller/login.php" method="post" class="login100-form validate-form p-b-33 p-t-5">
+
+					<div class="wrap-input100 validate-input" data-validate="Enter username">
+						<input class="input100" type="text" name="user" placeholder="Usuario">
+						<span class="focus-input100" data-placeholder="&#xe82a;"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Enter password">
+						<input class="input100" type="password" name="pass" placeholder="Contraseña">
+						<span class="focus-input100" data-placeholder="&#xe80f;"></span>
+					</div>
+
+					<div class="container-login100-form-btn m-t-32">
+						<button class="login100-form-btn">
+							Iniciar sesion
+						</button>
+					</div>
+					<div class="row">
+						<div class="col-12 d-flex justify-content-center">
+							<a href="./register.php" class="m-t-22 ">No tienes cuentas?</a>
+						</div>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
 
 
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseGeneros" aria-expanded="false" aria-controls="collapseGeneros">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-masks-theater"></i></div>
-                            Generos
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapseGeneros" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionGeneros">
-                                <a class="nav-link" href="index.html">
-                                    <div class="sb-nav-link-icon"><i class="fa-solid fa-eye"></i></div>
-                                    Ver Generos
-                                </a>
-                                <a class="nav-link" href="index.html">
-                                    <div class="sb-nav-link-icon"><i class="fa-solid fa-plus"></i></div>
-                                    Agregar Genero
-                                </a>
-                            </nav>
-                        </div>
+	<div id="dropDownSelect1"></div>
 
+	<!--===============================================================================================-->
+	<script src="./assets/vendor/jquery/jquery-3.2.1.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="./assets/vendor/animsition/js/animsition.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="./assets/vendor/bootstrap/js/popper.js"></script>
+	<script src="./assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="./assets/vendor/select2/select2.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="./assets/vendor/daterangepicker/moment.min.js"></script>
+	<script src="./assets/vendor/daterangepicker/daterangepicker.js"></script>
+	<!--===============================================================================================-->
+	<script src="./assets/vendor/countdowntime/countdowntime.js"></script>
+	<!--===============================================================================================-->
+	<script src="./assets/js/main.js"></script>
 
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseUsuarios" aria-expanded="false" aria-controls="collapseUsuarios">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-user-group"></i></div>
-                            Usuarios
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapseUsuarios" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionUsuarios">
-                                <a class="nav-link" href="index.html">
-                                    <div class="sb-nav-link-icon"><i class="fa-solid fa-eye"></i></div>
-                                    Ver Usuarios
-                                </a>
-                                <a class="nav-link" href="index.html">
-                                    <div class="sb-nav-link-icon"><i class="fa-solid fa-plus"></i></div>
-                                    Agregar Usuario
-                                </a>
-                            </nav>
-                        </div>
-
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseIdiomas" aria-expanded="false" aria-controls="collapseIdiomas">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-globe"></i></div>
-                            Idiomas
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapseIdiomas" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionIdiomas">
-                                <a class="nav-link" href="index.html">
-                                    <div class="sb-nav-link-icon"><i class="fa-solid fa-eye"></i></div>
-                                    Ver Idiomas
-                                </a>
-                                <a class="nav-link" href="agregarIdioma.php">
-                                    <div class="sb-nav-link-icon"><i class="fa-solid fa-plus"></i></div>
-                                    Agregar Idioma
-                                </a>
-                            </nav>
-                        </div>
-
-                        <a class="nav-link" href="index.html">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-file-contract"></i></div>
-                            Ver Repostes
-                        </a>
-                    </div>
-                </div>
-            </nav>
-        </div>
-        <div id="layoutSidenav_content">
-            <main>
-                <div class="container-fluid px-4">
-                    <table class="table table-striped border mt-4">
-                        <thead>
-                            <tr>
-                                <th>ID_Pelicula</th>
-                                <th>nom_Pelicula</th>
-                                <th>descripcion</th>
-                                <th>descripcion</th>
-                                <th>Editar</th>
-                                <th>Eliminar</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php while ($row = mysqli_fetch_array($consulta)) { ?>
-                                <tr>
-                                    <td><?php echo $row['id_Pelicula'] ?></td>
-                                    <td><?php echo $row['nom_Pelicula'] ?></td>
-                                    <td><?php echo $row['descripcion'] ?></td>
-                                    <td><?php echo $row['Usuarios_id_Usuario'] ?></td>
-                                    <td><a class="btn btn-success bi bi-pencil" href="./editar.php?id=<?php echo $row['id_Usuario'] ?>"></a></td>
-                                    <td><a class="btn btn-danger bi bi-trash" href="./controlador/eliminar.php?id_Usuario=<?php echo $row['id_Usuario'] ?>"></a></td>
-                                </tr>
-                            <?php } ?>
-                        </tbody>
-                    </table>
-
-                </div>
-            </main>
-            <footer class="py-4 bg-light mt-auto">
-                <div class="container-fluid px-4">
-                    <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted">Copyright &copy; Your Website 2023</div>
-                        <div>
-                            <a href="#">Privacy Policy</a>
-                            &middot;
-                            <a href="#">Terms &amp; Conditions</a>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-        </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    <script src="./assets/js2/scripts.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-    <script src="./assets/assets/demo/chart-area-demo.js"></script>
-    <script src="./assets/assets/demo/chart-bar-demo.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
-    <script src="./assets/js2/datatables-simple-demo.js"></script>
 </body>
 
 </html>
